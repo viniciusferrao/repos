@@ -1,0 +1,445 @@
+#!/bin/sh
+# sample rc.local 
+# add your code below
+# $FreeBSD: release/10.0.0/release/rc.local 245742 2013-01-21 14:06:33Z nwhitehorn $
+
+: ${DIALOG_OK=0}
+: ${DIALOG_CANCEL=1}
+: ${DIALOG_HELP=2}
+: ${DIALOG_EXTRA=3}
+: ${DIALOG_ITEM_HELP=4}
+: ${DIALOG_ESC=255}
+
+MACHINE=`uname -m`
+RELEASE=`uname -r`
+
+kbdcontrol -d >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+	# Syscons: use xterm, start interesting things on other VTYs
+	if [ ${MACHINE} = "pc98" ]; then
+		TERM=cons25w
+	else
+		TERM=xterm
+	fi
+
+	if [ -z "$EXTERNAL_VTY_STARTED" ]; then
+		# Init will clean these processes up if/when the system
+		# goes multiuser
+		touch /tmp/bsdinstall_log
+		tail -f /tmp/bsdinstall_log > /dev/ttyv2 &
+		/usr/libexec/getty autologin ttyv3 &
+		EXTERNAL_VTY_STARTED=1
+	fi
+else
+	# Serial or other console
+	echo
+	echo "Welcome to FreeBSD!"
+	echo
+	echo "Please choose the appropriate terminal type for your system."
+	echo "Common console types are:"
+	echo "   ansi     Standard ANSI terminal"
+	echo "   vt100    VT100 or compatible terminal"
+	echo "   xterm    xterm terminal emulator (or compatible)"
+	echo "   cons25w  cons25w terminal"
+	echo
+	echo -n "Console type [vt100]: "
+	read TERM
+	TERM=${TERM:-vt100}
+fi
+export TERM
+
+# Unattended installation
+
+#-
+# Copyright (c) 2011 Nathan Whitehorn
+# Copyright (c) 2013 Devin Teske
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+# 1. Redistributions of source code must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright
+#    notice, this list of conditions and the following disclaimer in the
+#    documentation and/or other materials provided with the distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+# OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+# HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+# OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+# SUCH DAMAGE.
+#
+# $FreeBSD: release/10.0.0/usr.sbin/bsdinstall/scripts/auto 259652 2013-12-20 15:46:24Z dteske $
+#
+############################################################ INCLUDES
+
+BSDCFG_SHARE="/usr/share/bsdconfig"
+. $BSDCFG_SHARE/common.subr || exit 1
+
+############################################################ FUNCTIONS
+
+error() {
+	test -n "$DISTDIR_IS_UNIONFS" && umount -f $BSDINSTALL_DISTDIR
+	test -f $PATH_FSTAB && bsdinstall umount
+	dialog --backtitle "FreeBSD Installer" --title "Abort" \
+	    --no-label "Exit" --yes-label "Restart" --yesno \
+	    "An installation step has been aborted. Would you like to restart the installation or exit the installer?" 0 0
+	if [ $? -ne 0 ]; then
+		reboot
+	else
+		/etc/rc.local	
+	fi
+}
+
+############################################################ MAIN
+
+# Don't send ESC on function-key 62/63 (left/right command key)
+f_quietly kbdcontrol -f 62 ''
+f_quietly kbdcontrol -f 63 ''
+
+f_dprintf "Began Installation at %s" "$( date )"
+
+rm -rf $BSDINSTALL_TMPETC
+mkdir $BSDINSTALL_TMPETC
+
+trap true SIGINT	# This section is optional
+bsdinstall keymap
+
+trap error SIGINT	# Catch cntrl-C here
+bsdinstall hostname || error
+
+# Define variables to complete the installation
+BSDINSTALL_DISTDIR=/usr/freebsd-dist
+BSDINSTALL_CHROOT=/mnt
+PATH_FSTAB=/tmp/bsdinstall-tmp-fstab
+
+export DISTRIBUTIONS="base.txz kernel.txz"
+if [ -f $BSDINSTALL_DISTDIR/MANIFEST ]; then
+	DISTMENU=`awk -F'\t' '!/^(kernel|base)/{print $4,$5,$6}' $BSDINSTALL_DISTDIR/MANIFEST`
+
+	exec 3>&1
+	EXTRA_DISTS=$( eval dialog \
+	    --backtitle \"FreeBSD Installer\" \
+	    --title \"Distribution Select\" --nocancel --separate-output \
+	    --checklist \"Choose optional system components to install:\" \
+	    0 0 0 $DISTMENU \
+	2>&1 1>&3 )
+	for dist in $EXTRA_DISTS; do
+		export DISTRIBUTIONS="$DISTRIBUTIONS $dist.txz"
+	done
+fi
+
+FETCH_DISTRIBUTIONS=""
+for dist in $DISTRIBUTIONS; do
+	if [ ! -f $BSDINSTALL_DISTDIR/$dist ]; then
+		FETCH_DISTRIBUTIONS="$FETCH_DISTRIBUTIONS $dist"
+	fi
+done
+FETCH_DISTRIBUTIONS=`echo $FETCH_DISTRIBUTIONS`	# Trim white space
+
+if [ -n "$FETCH_DISTRIBUTIONS" -a -n "$BSDINSTALL_CONFIGCURRENT" ]; then
+	dialog --backtitle "FreeBSD Installer" --title "Network Installation" --msgbox "No installation files were found on the boot volume. The next few screens will allow you to configure networking so that they can be downloaded from the Internet." 0 0
+
+# Disabled Netconfig
+#	bsdinstall netconfig || error
+# End of disabled Netconfig
+
+	NETCONFIG_DONE=yes
+fi
+
+# Hardcoding BSDINSTALL_DISTSITE
+#if [ -n "$FETCH_DISTRIBUTIONS" ]; then
+#	exec 3>&1
+#	BSDINSTALL_DISTSITE=$(`dirname $0`/mirrorselect 2>&1 1>&3)
+#	MIRROR_BUTTON=$?
+#	exec 3>&-
+#	test $MIRROR_BUTTON -eq 0 || error
+#	export BSDINSTALL_DISTSITE
+#fi
+BSDINSTALL_DISTSITE="http://mirror.cc.if.ufrj.br/repos/freebsd/releases/$MACHINE/$RELEASE"
+export BSDINSTALL_DISTSITE
+# End of BSDINSTALL_DISTSITE hardcoding
+
+rm -f $PATH_FSTAB
+touch $PATH_FSTAB
+
+PMODES="\
+Guided \"Partitioning Tool (Recommended for Beginners)\" \
+Manual \"Manually Configure Partitions (Expert)\" \
+Shell \"Open a shell and partition by hand\""
+
+CURARCH=$( uname -m )
+case $CURARCH in
+	amd64|i386)	# Booting ZFS Supported
+		PMODES="$PMODES ZFS \"Automatic Root-on-ZFS (Experimental)\""
+		;;
+	*)		# Booting ZFS Unspported
+		;;
+esac
+
+exec 3>&1
+PARTMODE=`echo $PMODES | xargs dialog --backtitle "FreeBSD Installer" \
+	--title "Partitioning" \
+	--menu "How would you like to partition your disk?" \
+	0 0 0 2>&1 1>&3` || exit 1
+exec 3>&-
+
+case "$PARTMODE" in
+"Guided")	# Guided
+	bsdinstall autopart || error
+	bsdinstall mount || error
+	;;
+"Shell")	# Shell
+	clear
+	echo "Use this shell to set up partitions for the new system. When finished, mount the system at $BSDINSTALL_CHROOT and place an fstab file for the new system at $PATH_FSTAB. Then type 'exit'. You can also enter the partition editor at any time by entering 'bsdinstall partedit'."
+	sh 2>&1
+	;;
+"Manual")	# Manual
+	if f_isset debugFile; then
+		# Give partedit the path to our logfile so it can append
+		BSDINSTALL_LOG="${debugFile#+}" bsdinstall partedit || error
+	else
+		bsdinstall partedit || error
+	fi
+	bsdinstall mount || error
+	;;
+"ZFS")	# ZFS
+	bsdinstall zfsboot || error
+	bsdinstall mount || error
+	;;
+*)
+	error
+	;;
+esac
+
+if [ ! -z "$FETCH_DISTRIBUTIONS" ]; then
+	ALL_DISTRIBUTIONS="$DISTRIBUTIONS"
+
+	# Download to a directory in the new system as scratch space
+	BSDINSTALL_FETCHDEST="$BSDINSTALL_CHROOT/usr/freebsd-dist"
+	mkdir -p "$BSDINSTALL_FETCHDEST" || error
+
+	export DISTRIBUTIONS="$FETCH_DISTRIBUTIONS"
+	# Try to use any existing distfiles
+	if [ -d $BSDINSTALL_DISTDIR ]; then
+		DISTDIR_IS_UNIONFS=1
+		mount_nullfs -o union "$BSDINSTALL_FETCHDEST" "$BSDINSTALL_DISTDIR"
+	else
+		export DISTRIBUTIONS="MANIFEST $ALL_DISTRIBUTIONS"
+		export BSDINSTALL_DISTDIR="$BSDINSTALL_FETCHDEST"
+	fi
+		
+	export FTP_PASSIVE_MODE=YES
+	bsdinstall distfetch || error
+	export DISTRIBUTIONS="$ALL_DISTRIBUTIONS"
+fi
+
+# Enable swap space to avoid fuckup during bsdinstall distextract
+swapon -a -F /tmp/bsdinstall_etc/fstab 
+
+bsdinstall checksum || error
+bsdinstall distextract || error
+bsdinstall rootpass || error
+
+#trap true SIGINT	# This section is optional
+#if [ "$NETCONFIG_DONE" != yes ]; then
+#	bsdinstall netconfig	# Don't check for errors -- the user may cancel
+#fi
+
+# Disable timezone setup
+#bsdinstall time
+# End of disable timezone setup
+bsdinstall services
+
+# Disable user creation
+#dialog --backtitle "FreeBSD Installer" --title "Add User Accounts" --yesno \
+#    "Would you like to add users to the installed system now?" 0 0 && \
+#    bsdinstall adduser
+# End of disable user creation
+
+# Disable end of installation menu: just reboot
+#finalconfig() {
+#	exec 3>&1
+#	REVISIT=$(dialog --backtitle "FreeBSD Installer" \
+#	    --title "Final Configuration" --no-cancel --menu \
+#	    "Setup of your FreeBSD system is nearly complete. You can now modify your configuration choices. After this screen, you will have an opportunity to make more complex changes using a shell." 0 0 0 \
+#		"Exit" "Apply configuration and exit installer" \
+#		"Add User" "Add a user to the system" \
+#		"Root Password" "Change root password" \
+#		"Hostname" "Set system hostname" \
+#		"Network" "Networking configuration" \
+#		"Services" "Set daemons to run on startup" \
+#		"Time Zone" "Set system timezone" \
+#		"Handbook" "Install FreeBSD Handbook (requires network)" 2>&1 1>&3)
+#	exec 3>&-
+#
+#	case "$REVISIT" in
+#	"Add User")
+#		bsdinstall adduser
+#		finalconfig
+#		;;
+#	"Root Password")
+#		bsdinstall rootpass 
+#		finalconfig
+#		;;
+#	"Hostname")
+#		bsdinstall hostname
+#		finalconfig
+#		;;
+#	"Network")
+#		bsdinstall netconfig
+#		finalconfig
+#		;;
+#	"Services")
+#		bsdinstall services
+#		finalconfig
+#		;;
+#	"Time Zone")
+#		bsdinstall time
+#		finalconfig
+#		;;
+#	"Handbook")
+#		bsdinstall docsinstall
+#		finalconfig
+#		;;
+#	esac
+#}
+#
+## Allow user to change his mind
+#finalconfig
+# End of final menu disable
+
+trap error SIGINT	# SIGINT is bad again
+bsdinstall config  || error
+
+if [ ! -z "$BSDINSTALL_FETCHDEST" ]; then
+	[ "$BSDINSTALL_FETCHDEST" != "$BSDINSTALL_DISTDIR" ] && \
+	    umount "$BSDINSTALL_DISTDIR"
+	rm -rf "$BSDINSTALL_FETCHDEST"
+fi
+
+# Disable shell options at end of installation
+#dialog --backtitle "FreeBSD Installer" --title "Manual Configuration" \
+#    --yesno "The installation is now finished. Before exiting the installer, would you like to open a shell in the new system to make any final manual modifications?" 0 0
+#if [ $? -eq 0 ]; then
+#	clear
+#	mount -t devfs devfs "$BSDINSTALL_CHROOT/dev"
+#	echo This shell is operating in a chroot in the new system. \
+#	    When finished making configuration changes, type \"exit\".
+#	chroot "$BSDINSTALL_CHROOT" /bin/sh 2>&1
+#fi
+
+# Start of custom modifications to the end system
+#DIALOG=${DIALOG=dialog}
+
+clear
+echo "Starting automatic update of FreeBSD installation"
+sleep 1
+
+# Force sshd to be enabled
+sed -i "" '/sshd_enable/d' "$BSDINSTALL_CHROOT/etc/rc.conf"
+echo "sshd_enable=\"YES\"" >> "$BSDINSTALL_CHROOT/etc/rc.conf"
+
+# Force ntpd to be enabled
+sed -i "" '/ntpd_enable/d' "$BSDINSTALL_CHROOT/etc/rc.conf"
+echo "ntpd_enable=\"YES\"" >> "$BSDINSTALL_CHROOT/etc/rc.conf"
+
+# Force dumpdev to be enabled
+sed -i "" '/dumpdev/d' "$BSDINSTALL_CHROOT/etc/rc.conf"
+echo "dumpdev=\"AUTO\"" >> "$BSDINSTALL_CHROOT/etc/rc.conf"
+
+# Niggers gonna niggaz.
+mkdir "$BSDINSTALL_CHROOT/root/.ssh"
+fetch -q http://mirror.cc.if.ufrj.br/keys/authorized_keys -o "$BSDINSTALL_CHROOT/root/.ssh"
+sed -i "" 's/\#PermitRootLogin\ no/PermitRootLogin\ without-password/' "$BSDINSTALL_CHROOT/etc/ssh/sshd_config"
+
+# Configure ntp
+sed -i "" 's/0.freebsd.pool.ntp.org/time.cc.if.ufrj.br/' "$BSDINSTALL_CHROOT/etc/ntp.conf"
+sed -i "" '/freebsd.pool.ntp.org/d' "$BSDINSTALL_CHROOT/etc/ntp.conf"
+
+# Configure localtime with UTC (non-UTC must touch /etc/wall_cmos_clock)
+cp $BSDINSTALL_CHROOT/usr/share/zoneinfo/America/Sao_Paulo $BSDINSTALL_CHROOT/etc/localtime
+
+# Copy DNS resolution to chroot env
+cp /etc/resolv.conf $BSDINSTALL_CHROOT/etc/resolv.conf
+
+# Configure networking in chroot env getting the first network interface
+INTERFACE=`ifconfig | grep ": flags" | grep -v lo | head -n 1 | cut -f 1 -d ":"`
+echo ifconfig_$INTERFACE=\"DHCP\" >> $BSDINSTALL_CHROOT/etc/rc.conf
+
+# Create chroot environment to final modifications
+mount -t devfs devfs "$BSDINSTALL_CHROOT/dev"
+
+# Update the system
+# Remove interactive check
+sed 's/\[ ! -t 0 \]/false/' $BSDINSTALL_CHROOT/usr/sbin/freebsd-update > $BSDINSTALL_CHROOT/tmp/freebsd-update
+# Change default pager and enforce it
+sed -i "" 's/-z \"$PAGER\"/true/' $BSDINSTALL_CHROOT/tmp/freebsd-update
+sed -i "" 's/PAGER=\/usr\/bin\/more/PAGER=\/bin\/cat/' $BSDINSTALL_CHROOT/tmp/freebsd-update
+chmod +x $BSDINSTALL_CHROOT/tmp/freebsd-update
+sed -i "" 's/update.FreeBSD.org/update.freebsd.cc.if.ufrj.br/' $BSDINSTALL_CHROOT/etc/freebsd-update.conf
+chroot $BSDINSTALL_CHROOT /tmp/freebsd-update fetch
+chroot $BSDINSTALL_CHROOT /tmp/freebsd-update install
+
+# Setup automatic updating
+echo "#FreeBSD Automatic Update" >> $BSDINSTALL_CHROOT/etc/crontab
+echo "0 4 * * * root /usr/sbin/freebsd-update cron install" >> $BSDINSTALL_CHROOT/etc/crontab
+
+# Add local pkg repository
+PUBKEY_REPO_DIR=/usr/local/etc/ssl/certs
+mkdir -p $BSDINSTALL_CHROOT/$PUBKEY_REPO_DIR
+fetch -q http://mirror.cc.if.ufrj.br/keys/pkg.freebsd.cc.if.ufrj.br.pub -o "$BSDINSTALL_CHROOT/$PUBKEY_REPO_DIR"
+
+CUSTOM_REPO_DIR=/usr/local/etc/pkg/repos
+mkdir -p $BSDINSTALL_CHROOT/$CUSTOM_REPO_DIR
+printf "cc.if.ufrj.br: {\n\
+\turl\t\t: "\""http://pkg.freebsd.cc.if.ufrj.br/packages/"\$"{ABI}-default"\"",\n\
+\tenabled\t\t: yes,\n\
+\tsignature_type\t: "\""PUBKEY"\"",\n\
+\tmirror_type\t: NONE,\n\
+\tpubkey\t\t: "\""$PUBKEY_REPO_DIR/pkg.freebsd.cc.if.ufrj.br.pub"\""\n\
+}" > $BSDINSTALL_CHROOT/$CUSTOM_REPO_DIR/cc.if.ufrj.br.conf
+
+# Disable default pkg repository
+echo "FreeBSD: { enabled: no }" > $BSDINSTALL_CHROOT/$CUSTOM_REPO_DIR/FreeBSD.conf
+
+# Bootstrap packages
+chroot $BSDINSTALL_CHROOT env ASSUME_ALWAYS_YES=YES pkg bootstrap
+chroot $BSDINSTALL_CHROOT pkg update
+
+# If XenServer detected then install xe-guest-utilities
+if [ -d /dev/xen ] ; then
+	echo `dmesg | grep XEN | head -n 1`
+	chroot $BSDINSTALL_CHROOT pkg install -y xe-guest-utilities
+	echo "xenguest_enable=\"YES\"" >> $BSDINSTALL_CHROOT/etc/rc.conf
+fi
+
+# Add packages
+chroot $BSDINSTALL_CHROOT pkg install -y vim-lite
+VIM_VERSION=`ls $BSDINSTALL_CHROOT/usr/local/share/vim | grep vim | sort -V | tail -n 1`
+cp $BSDINSTALL_CHROOT/usr/local/share/vim/$VIM_VERSION/vimrc_example.vim $BSDINSTALL_CHROOT/root/.vimrc
+
+# Umount chroot /dev environment
+umount $BSDINSTALL_CHROOT/dev
+
+# Dialog handling
+#$DIALOG --title "My Gauge" --gauge "Hi, this is a gauge widget" 20 70 0
+
+bsdinstall entropy
+bsdinstall umount
+
+f_dprintf "Installation Completed at %s" "$( date )"
+
+# Reboot this shit in all of its glory
+reboot
+
+################################################################################
+# END
+################################################################################
