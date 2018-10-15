@@ -1,0 +1,1 @@
+0 2 * * * root cd /nfs/repos/cc/deb ; reprepro update ; reprepro export
