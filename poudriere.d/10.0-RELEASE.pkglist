@@ -1,0 +1,49 @@
+#Basics
+editors/vim-lite
+sysutils/xe-guest-utilities
+sysutils/screen
+net/rsync
+
+#Mirroing tools
+ftp/lftp
+
+#Ports Management
+ports-mgmt/dialog4ports
+ports-mgmt/poudriere
+
+#Monitoring (Zabbix)
+net-mgmt/zabbix34-agent
+net-mgmt/zabbix34-server
+net-mgmt/zabbix34-proxy
+net-mgmt/zabbix34-frontend
+
+#Webserver
+www/nginx
+lang/php56-extensions
+net/php56-ldap
+graphics/php56-gd
+www/fcgiwrap
+www/p5-FCGI
+www/p5-CGI-Fast
+
+#Devel
+devel/ruby-gems
+
+#Mail
+mail/postfix
+mail/mailman
+
+#Databases
+databases/mariadb102-server
+databases/php56-mysql
+databases/postgresql95-server
+
+#Web Appliances
+databases/phpmyadmin
+www/wordpress
+
+#Generic Utils
+sysutils/syslinux
+
+#Others
+security/acme.sh
