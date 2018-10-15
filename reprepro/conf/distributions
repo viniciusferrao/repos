@@ -1,0 +1,90 @@
+Origin: Computação Central
+Label: CC-IF/UFRJ
+Codename: squeeze
+Architectures: i386 amd64 source
+Suite: internal
+Components: main
+Description: Private CC-IF/UFRJ Debian Squeeze Repository
+Update: zabbix22-debian
+SignWith: D8CCFB6BF976644B
+
+Origin: Computação Central 
+Label: CC-IF/UFRJ
+Codename: wheezy
+Architectures: i386 amd64 source
+Suite: internal
+Components: main
+Description: Private CC-IF/UFRJ Debian Wheezy Repository
+Update: zabbix22-debian zabbix24-debian zabbix32-debian zabbix34-debian
+SignWith: D8CCFB6BF976644B
+
+Origin: Computação Central 
+Label: CC-IF/UFRJ
+Codename: jessie
+Architectures: i386 amd64 source
+Suite: internal
+Components: main
+Description: Private CC-IF/UFRJ Debian Jessie Repository
+Update: zabbix24-debian zabbix32-debian zabbix34-debian
+SignWith: D8CCFB6BF976644B
+
+Origin: Computação Central 
+Label: CC-IF/UFRJ
+Codename: stretch
+Architectures: i386 amd64 source
+Suite: internal
+Components: main
+Description: Private CC-IF/UFRJ Debian Stretch Repository
+Update: zabbix32-debian zabbix34-debian
+SignWith: D8CCFB6BF976644B
+
+Origin: Computação Central
+Label: CC-IF/UFRJ
+Codename: lucid
+Architectures: i386 amd64 source
+Suite: internal
+Components: main
+Description: Private CC-IF/UFRJ Ubuntu Lucid Lynx Repository
+Update: webupd8team-java zabbix22-ubuntu
+SignWith: D8CCFB6BF976644B
+
+Origin: Computação Central
+Label: CC-IF/UFRJ
+Codename: precise
+Architectures: i386 amd64 source
+Suite: internal
+Components: main
+Description: Private CC-IF/UFRJ Ubuntu Precise Pangolin Repository
+Update: webupd8team-java zabbix22-ubuntu zabbix24-ubuntu
+SignWith: D8CCFB6BF976644B
+
+Origin: Computação Central
+Label: CC-IF/UFRJ
+Codename: trusty
+Architectures: i386 amd64 source
+Suite: internal
+Components: main
+Description: Private CC-IF/UFRJ Ubuntu Trusty Tahr Repository
+Update: webupd8team-java zabbix22-ubuntu zabbix24-ubuntu zabbix32-ubuntu zabbix34-ubuntu
+SignWith: D8CCFB6BF976644B
+
+Origin: Computação Central
+Label: CC-IF/UFRJ
+Codename: xenial
+Architectures: i386 amd64 source
+Suite: internal
+Components: main
+Description: Private CC-IF/UFRJ Ubuntu Xenial Xerus Repository
+Update: webupd8team-java zabbix32-ubuntu zabbix34-ubuntu
+SignWith: D8CCFB6BF976644B
+
+Origin: Computação Central
+Label: CC-IF/UFRJ
+Codename: bionic
+Architectures: i386 amd64 source
+Suite: internal
+Components: main
+Description: Private CC-IF/UFRJ Ubuntu Xenial Xerus Repository
+Update: webupd8team-java
+SignWith: D8CCFB6BF976644B
+

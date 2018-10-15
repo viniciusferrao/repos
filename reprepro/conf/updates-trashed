@@ -1,0 +1,144 @@
+Name: zabbix22-debian
+Method: http://repo.zabbix.com/zabbix/2.2/debian
+VerifyRelease: 79EA5ED4
+Suite: squeeze
+
+Name: zabbix22-debian
+Method: http://repo.zabbix.com/zabbix/2.2/debian
+VerifyRelease: 79EA5ED4
+Suite: wheezy
+
+Name: zabbix24-debian
+Method: http://repo.zabbix.com/zabbix/2.4/debian
+VerifyRelease: 79EA5ED4
+Suite: wheezy
+
+Name: zabbix24-debian
+Method: http://repo.zabbix.com/zabbix/2.4/debian
+VerifyRelease: 79EA5ED4
+Suite: jessie
+
+Name: zabbix30-debian
+Method: http://repo.zabbix.com/zabbix/3.2/debian
+VerifyRelease: 79EA5ED4
+Suite: wheezy
+
+Name: zabbix30-debian
+Method: http://repo.zabbix.com/zabbix/3.2/debian
+VerifyRelease: 79EA5ED4
+Suite: jessie
+
+Name: zabbix30-debian
+Method: http://repo.zabbix.com/zabbix/3.2/debian
+VerifyRelease: 79EA5ED4
+Suite: stretch
+
+Name: zabbix32-debian
+Method: http://repo.zabbix.com/zabbix/3.2/debian
+VerifyRelease: 79EA5ED4
+Suite: wheezy
+
+Name: zabbix32-debian
+Method: http://repo.zabbix.com/zabbix/3.2/debian
+VerifyRelease: 79EA5ED4
+Suite: jessie
+
+Name: zabbix32-debian
+Method: http://repo.zabbix.com/zabbix/3.2/debian
+VerifyRelease: 79EA5ED4
+Suite: stretch
+
+Name: zabbix34-debian
+Method: http://repo.zabbix.com/zabbix/3.4/debian
+VerifyRelease: 79EA5ED4
+Suite: wheezy
+
+Name: zabbix34-debian
+Method: http://repo.zabbix.com/zabbix/3.4/debian
+VerifyRelease: 79EA5ED4
+Suite: jessie
+
+Name: zabbix34-debian
+Method: http://repo.zabbix.com/zabbix/3.4/debian
+VerifyRelease: 79EA5ED4
+Suite: stretch
+
+Name: zabbix22-ubuntu
+Method: http://repo.zabbix.com/zabbix/2.2/ubuntu
+VerifyRelease: 79EA5ED4
+Suite: lucid
+
+Name: zabbix22-ubuntu
+Method: http://repo.zabbix.com/zabbix/2.2/ubuntu
+VerifyRelease: 79EA5ED4
+Suite: precise
+
+Name: zabbix22-ubuntu
+Method: http://repo.zabbix.com/zabbix/2.2/ubuntu
+VerifyRelease: 79EA5ED4
+Suite: trusty
+
+Name: zabbix24-ubuntu
+Method: http://repo.zabbix.com/zabbix/2.4/ubuntu
+VerifyRelease: 79EA5ED4
+Suite: precise
+
+Name: zabbix24-ubuntu
+Method: http://repo.zabbix.com/zabbix/2.4/ubuntu
+VerifyRelease: 79EA5ED4
+Suite: trusty
+
+Name: zabbix30-ubuntu
+Method: http://repo.zabbix.com/zabbix/3.2/ubuntu
+VerifyRelease: 79EA5ED4
+Suite: trusty
+
+Name: zabbix30-ubuntu
+Method: http://repo.zabbix.com/zabbix/3.2/ubuntu
+VerifyRelease: 79EA5ED4
+Suite: xenial
+
+Name: zabbix32-ubuntu
+Method: http://repo.zabbix.com/zabbix/3.2/ubuntu
+VerifyRelease: 79EA5ED4
+Suite: trusty
+
+Name: zabbix32-ubuntu
+Method: http://repo.zabbix.com/zabbix/3.2/ubuntu
+VerifyRelease: 79EA5ED4
+Suite: xenial
+
+Name: zabbix34-ubuntu
+Method: http://repo.zabbix.com/zabbix/3.4/ubuntu
+VerifyRelease: 79EA5ED4
+Suite: trusty
+
+Name: zabbix34-ubuntu
+Method: http://repo.zabbix.com/zabbix/3.4/ubuntu
+VerifyRelease: 79EA5ED4
+Suite: xenial
+
+Name: webupd8team-java
+Method: http://ppa.launchpad.net/webupd8team/java/ubuntu
+VerifyRelease: EEA14886
+Suite: lucid
+GetInRelease: no
+
+Name: webupd8team-java
+Method: http://ppa.launchpad.net/webupd8team/java/ubuntu
+VerifyRelease: EEA14886
+Suite: precise
+GetInRelease: no
+
+Name: webupd8team-java
+Method: http://ppa.launchpad.net/webupd8team/java/ubuntu
+VerifyRelease: EEA14886
+Suite: trusty
+GetInRelease: no
+
+Name: webupd8team-java
+Method: http://ppa.launchpad.net/webupd8team/java/ubuntu
+VerifyRelease: EEA14886
+Suite: xenial
+GetInRelease: no
+

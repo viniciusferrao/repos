@@ -1,0 +1,56 @@
+Name: zabbix22-debian
+Method: http://repo.zabbix.com/zabbix/2.2/debian
+VerifyRelease: 79EA5ED4
+Suite: *
+
+Name: zabbix24-debian
+Method: http://repo.zabbix.com/zabbix/2.4/debian
+VerifyRelease: 79EA5ED4
+Suite: *
+
+#Name: zabbix30-debian
+#Method: http://repo.zabbix.com/zabbix/3.0/debian
+#VerifyRelease: 79EA5ED4
+#Suite: *
+
+Name: zabbix32-debian
+Method: http://repo.zabbix.com/zabbix/3.2/debian
+VerifyRelease: 082AB56BA14FE591
+Suite: *
+
+Name: zabbix34-debian
+Method: http://repo.zabbix.com/zabbix/3.4/debian
+VerifyRelease: 082AB56BA14FE591
+Suite: *
+
+Name: zabbix22-ubuntu
+Method: http://repo.zabbix.com/zabbix/2.2/ubuntu
+VerifyRelease: 79EA5ED4
+Suite: *
+
+Name: zabbix24-ubuntu
+Method: http://repo.zabbix.com/zabbix/2.4/ubuntu
+VerifyRelease: 79EA5ED4
+Suite: *
+
+#Name: zabbix30-ubuntu
+#Method: http://repo.zabbix.com/zabbix/3.0/ubuntu
+#VerifyRelease: D13D58E479EA5ED4
+#Suite: *
+
+Name: zabbix32-ubuntu
+Method: http://repo.zabbix.com/zabbix/3.2/ubuntu
+VerifyRelease: 082AB56BA14FE591
+Suite: *
+
+Name: zabbix34-ubuntu
+Method: http://repo.zabbix.com/zabbix/3.4/ubuntu
+VerifyRelease: 082AB56BA14FE591
+Suite: *
+
+Name: webupd8team-java
+Method: http://ppa.launchpad.net/webupd8team/java/ubuntu
+VerifyRelease: EEA14886
+Suite: *
+GetInRelease: no
+
