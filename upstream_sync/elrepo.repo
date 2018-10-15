@@ -1,0 +1,168 @@
+### Name: ELRepo.org Community Enterprise Linux Repository for el7
+### URL: http://elrepo.org/
+
+# ELRepo EL7
+
+[elrepo-7-x86_64]
+url = http://elrepo.org/linux/elrepo/el7/x86_64/
+path = elrepo/el7/x86_64
+createrepo = true
+
+[elrepo-7-testing-x86_64]
+url = http://elrepo.org/linux/testing/el7/x86_64/
+path = elrepo/testing/el7/x86_64
+createrepo = true
+
+[elrepo-7-kernel-x86_64]
+url = http://elrepo.org/linux/kernel/el7/x86_64/
+path = elrepo/kernel/el7/x86_64
+createrepo = true
+
+[elrepo-7-extras-x86_64]
+url = http://elrepo.org/linux/extras/el7/x86_64/
+path = elrepo/extras/el7/x86_64
+createrepo = true
+
+[elrepo-7-SRPMS]
+url = http://elrepo.org/linux/elrepo/el7/SRPMS/
+path = elrepo/el7/SRPMS
+createrepo = true
+
+[elrepo-7-testing-SRPMS]
+url = http://elrepo.org/linux/testing/el7/SRPMS/
+path = elrepo/testing/el7/SRPMS
+createrepo = true
+
+[elrepo-7-kernel-SRPMS]
+url = http://elrepo.org/linux/kernel/el7/SRPMS/
+path = elrepo/kernel/el7/SRPMS
+createrepo = true
+
+[elrepo-7-extras-SRPMS]
+url = http://elrepo.org/linux/extras/el7/SRPMS/
+path = elrepo/extras/el7/SRPMS
+createrepo = true
+
+# ELRepo EL6
+
+[elrepo-6-x86_64]
+url = http://elrepo.org/linux/elrepo/el6/x86_64/
+path = elrepo/el6/x86_64
+createrepo = true
+
+[elrepo-6-testing-x86_64]
+url = http://elrepo.org/linux/testing/el6/x86_64/
+path = elrepo/testing/el6/x86_64
+createrepo = true
+
+[elrepo-6-kernel-x86_64]
+url = http://elrepo.org/linux/kernel/el6/x86_64/
+path = elrepo/kernel/el6/x86_64
+createrepo = true
+
+[elrepo-6-extras-x86_64]
+url = http://elrepo.org/linux/extras/el6/x86_64/
+path = elrepo/extras/el6/x86_64
+createrepo = true
+
+[elrepo-6-i386]
+url = http://elrepo.org/linux/elrepo/el6/i386/
+path = elrepo/el6/i386
+createrepo = true
+
+[elrepo-6-testing-i386]
+url = http://elrepo.org/linux/testing/el6/i386/
+path = elrepo/testing/el6/i386
+createrepo = true
+
+[elrepo-6-kernel-i386]
+url = http://elrepo.org/linux/kernel/el6/i386/
+path = elrepo/kernel/el6/i386
+createrepo = true
+
+[elrepo-6-extras-i386]
+url = http://elrepo.org/linux/extras/el6/i386/
+path = elrepo/extras/el6/i386
+createrepo = true
+
+[elrepo-6-SRPMS]
+url = http://elrepo.org/linux/elrepo/el6/SRPMS/
+path = elrepo/el6/SRPMS
+createrepo = true
+
+[elrepo-6-testing-SRPMS]
+url = http://elrepo.org/linux/testing/el6/SRPMS/
+path = elrepo/testing/el6/SRPMS
+createrepo = true
+
+[elrepo-6-kernel-SRPMS]
+url = http://elrepo.org/linux/kernel/el6/SRPMS/
+path = elrepo/kernel/el6/SRPMS
+createrepo = true
+
+[elrepo-6-extras-SRPMS]
+url = http://elrepo.org/linux/extras/el6/SRPMS/
+path = elrepo/extras/el6/SRPMS
+createrepo = true
+
+# ELRepo EL5
+
+[elrepo-5-x86_64]
+url = http://elrepo.org/linux/elrepo/el5/x86_64/
+path = elrepo/el5/x86_64
+createrepo = true
+
+[elrepo-5-testing-x86_64]
+url = http://elrepo.org/linux/testing/el5/x86_64/
+path = elrepo/testing/el5/x86_64
+createrepo = true
+
+[elrepo-5-kernel-x86_64]
+url = http://elrepo.org/linux/kernel/el5/x86_64/
+path = elrepo/kernel/el5/x86_64
+createrepo = true
+
+[elrepo-5-extras-x86_64]
+url = http://elrepo.org/linux/extras/el5/x86_64/
+path = elrepo/extras/el5/x86_64
+createrepo = true
+
+[elrepo-5-i386]
+url = http://elrepo.org/linux/elrepo/el5/i386/
+path = elrepo/el5/i386
+createrepo = true
+
+[elrepo-5-testing-i386]
+url = http://elrepo.org/linux/testing/el5/i386/
+path = elrepo/testing/el5/i386
+createrepo = true
+
+[elrepo-5-kernel-i386]
+url = http://elrepo.org/linux/kernel/el5/i386/
+path = elrepo/kernel/el5/i386
+createrepo = true
+
+[elrepo-5-extras-i386]
+url = http://elrepo.org/linux/extras/el5/i386/
+path = elrepo/extras/el5/i386
+createrepo = true
+
+[elrepo-5-SRPMS]
+url = http://elrepo.org/linux/elrepo/el5/SRPMS/
+path = elrepo/el5/SRPMS
+createrepo = true
+
+[elrepo-5-testing-SRPMS]
+url = http://elrepo.org/linux/testing/el5/SRPMS/
+path = elrepo/testing/el5/SRPMS
+createrepo = true
+
+[elrepo-5-kernel-SRPMS]
+url = http://elrepo.org/linux/kernel/el5/SRPMS/
+path = elrepo/kernel/el5/SRPMS
+createrepo = true
+
+[elrepo-5-extras-SRPMS]
+url = http://elrepo.org/linux/extras/el5/SRPMS/
+path = elrepo/extras/el5/SRPMS
+createrepo = true

@@ -1,0 +1,276 @@
+[rh-gluster-3-client-for-rhel-7-server-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/rhs-client/os
+path = rhel/server/7/7Server/x86_64/rhs-client/os
+createrepo = true
+
+[rh-gluster-3-client-for-rhel-7-server-source-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/rhs-client/source/SRPMS
+path = rhel/server/7/7Server/x86_64/rhs-client/source/SRPMS
+createrepo = true
+
+[rhel-7-server-dotnet-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/dotnet/1/os
+path = rhel/server/7/7Server/x86_64/dotnet/1/os
+createrepo = true
+
+[rhel-7-server-dotnet-source-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/dotnet/1/source/SRPMS
+path = rhel/server/7/7Server/x86_64/dotnet/1/source/SRPMS
+createrepo = true
+
+[rhel-7-server-extras-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/extras/os
+path = rhel/server/7/7Server/x86_64/extras/os
+createrepo = true
+
+[rhel-7-server-extras-source-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/extras/source/SRPMS
+path = rhel/server/7/7Server/x86_64/extras/source/SRPMS
+createrepo = true
+
+[rhel-7-server-fastrack-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/fastrack/rhel/server/7/x86_64/os
+path = rhel/fastrack/rhel/server/7/x86_64/os
+createrepo = true
+
+[rhel-7-server-fastrack-source-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/fastrack/rhel/server/7/x86_64/source/SRPMS
+path = rhel/fastrack/rhel/server/7/x86_64/source/SRPMS
+createrepo = true
+
+[rhel-7-server-openstack-7.0-tools-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/openstack-tools/7.0/os
+path = rhel/server/7/7Server/x86_64/openstack-tools/7.0/os
+createrepo = true
+
+[rhel-7-server-openstack-7.0-tools-source-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/openstack-tools/7.0/source/SRPMS
+path = rhel/server/7/7Server/x86_64/openstack-tools/7.0/source/SRPMS
+createrepo = true
+
+[rhel-7-server-openstack-8-tools-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/openstack-tools/8/os
+path = rhel/server/7/7Server/x86_64/openstack-tools/8/os
+createrepo = true
+
+[rhel-7-server-openstack-8-tools-source-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/openstack-tools/8/source/SRPMS
+path = rhel/server/7/7Server/x86_64/openstack-tools/8/source/SRPMS
+createrepo = true
+
+[rhel-7-server-optional-fastrack-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/fastrack/rhel/server/7/x86_64/optional/os
+path = rhel/fastrack/rhel/server/7/x86_64/optional/os
+createrepo = true
+
+[rhel-7-server-optional-fastrack-source-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/fastrack/rhel/server/7/x86_64/optional/source/SRPMS
+path = rhel/fastrack/rhel/server/7/x86_64/optional/source/SRPMS
+createrepo = true
+
+[rhel-7-server-optional-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/optional/os
+path = rhel/server/7/7Server/x86_64/optional/os
+createrepo = true
+
+[rhel-7-server-optional-source-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/optional/source/SRPMS
+path = rhel/server/7/7Server/x86_64/optional/source/SRPMS
+createrepo = true
+
+[rhel-7-server-rh-common-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/rh-common/os
+path = rhel/server/7/7Server/x86_64/rh-common/os
+createrepo = true
+
+[rhel-7-server-rh-common-source-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/rh-common/source/SRPMS
+path = rhel/server/7/7Server/x86_64/rh-common/source/SRPMS
+createrepo = true
+
+[rhel-7-server-rhceph-1.3-tools-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/ceph-tools/1.3/os
+path = rhel/server/7/7Server/x86_64/ceph-tools/1.3/os
+createrepo = true
+
+[rhel-7-server-rhceph-1.3-tools-source-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/ceph-tools/1.3/source/SRPMS
+path = rhel/server/7/7Server/x86_64/ceph-tools/1.3/source/SRPMS
+createrepo = true
+
+[rhel-7-server-rhn-tools-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/rhn-tools/os
+path = rhel/server/7/7Server/x86_64/rhn-tools/os
+createrepo = true
+
+[rhel-7-server-rhn-tools-source-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/rhn-tools/source/SRPMS
+path = rhel/server/7/7Server/x86_64/rhn-tools/source/SRPMS
+createrepo = true
+
+[rhel-7-server-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/os
+path = rhel/server/7/7Server/x86_64/os
+createrepo = true
+
+[rhel-7-server-rt-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/rt/os
+path = rhel/server/7/7Server/x86_64/rt/os
+createrepo = true
+
+[rhel-7-server-rt-source-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/rt/source/SRPMS
+path = rhel/server/7/7Server/x86_64/rt/source/SRPMS
+createrepo = true
+
+[rhel-7-server-satellite-tools-6.1-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/sat-tools/6.1/os
+path = rhel/server/7/7Server/x86_64/sat-tools/6.1/os
+createrepo = true
+
+[rhel-7-server-satellite-tools-6.1-source-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/sat-tools/6.1/source/SRPMS
+path = rhel/server/7/7Server/x86_64/sat-tools/6.1/source/SRPMS
+createrepo = true
+
+[rhel-7-server-source-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/source/SRPMS
+path = rhel/server/7/7Server/x86_64/source/SRPMS
+createrepo = true
+
+[rhel-7-server-supplementary-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/supplementary/os
+path = rhel/server/7/7Server/x86_64/supplementary/os
+createrepo = true
+
+[rhel-7-server-supplementary-source-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/supplementary/source/SRPMS
+path = rhel/server/7/7Server/x86_64/supplementary/source/SRPMS
+createrepo = true
+
+[rhel-7-server-thirdparty-oracle-java-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/oracle-java/os
+path = rhel/server/7/7Server/x86_64/oracle-java/os
+createrepo = true
+
+[rhel-7-server-thirdparty-oracle-java-source-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/oracle-java/source/SRPMS
+path = rhel/server/7/7Server/x86_64/oracle-java/source/SRPMS
+createrepo = true
+
+[rhel-7-server-v2vwin-1-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/v2vwin/os
+path = rhel/server/7/7Server/x86_64/v2vwin/os
+createrepo = true
+
+[rhel-7-server-v2vwin-1-source-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/v2vwin/source/SRPMS
+path = rhel/server/7/7Server/x86_64/v2vwin/source/SRPMS
+createrepo = true
+
+[rhel-atomic-host-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/atomic/7/7Server/x86_64/os
+path = rhel/atomic/7/7Server/x86_64/os
+createrepo = true
+
+[rhel-atomic-host-source-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/atomic/7/7Server/x86_64/source/SRPMS
+path = rhel/atomic/7/7Server/x86_64/source/SRPMS
+createrepo = true
+
+[rhel-ha-for-rhel-7-server-fastrack-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/fastrack/rhel/server/7/x86_64/highavailability/os
+path = rhel/fastrack/rhel/server/7/x86_64/highavailability/os
+createrepo = true
+
+[rhel-ha-for-rhel-7-server-fastrack-source-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/fastrack/rhel/server/7/x86_64/highavailability/source/SRPMS
+path = rhel/fastrack/rhel/server/7/x86_64/highavailability/source/SRPMS
+createrepo = true
+
+[rhel-ha-for-rhel-7-server-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/highavailability/os
+path = rhel/server/7/7Server/x86_64/highavailability/os
+createrepo = true
+
+[rhel-ha-for-rhel-7-server-source-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/highavailability/source/SRPMS
+path = rhel/server/7/7Server/x86_64/highavailability/source/SRPMS
+createrepo = true
+
+[rhel-rs-for-rhel-7-server-fastrack-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/fastrack/rhel/server/7/x86_64/resilientstorage/os
+path = rhel/fastrack/rhel/server/7/x86_64/resilientstorage/os
+createrepo = true
+
+[rhel-rs-for-rhel-7-server-fastrack-source-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/fastrack/rhel/server/7/x86_64/resilientstorage/source/SRPMS
+path = rhel/fastrack/rhel/server/7/x86_64/resilientstorage/source/SRPMS
+createrepo = true
+
+[rhel-rs-for-rhel-7-server-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/resilientstorage/os
+path = rhel/server/7/7Server/x86_64/resilientstorage/os
+createrepo = true
+
+[rhel-rs-for-rhel-7-server-source-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/resilientstorage/source/SRPMS
+path = rhel/server/7/7Server/x86_64/resilientstorage/source/SRPMS
+createrepo = true
+
+[rhel-server-rhscl-7-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/rhscl/1/os
+path = rhel/server/7/7Server/x86_64/rhscl/1/os
+createrepo = true
+
+[rhel-server-rhscl-7-source-rpms]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/rhscl/1/source/SRPMS
+path = rhel/server/7/7Server/x86_64/rhscl/1/source/SRPMS
+createrepo = true
+

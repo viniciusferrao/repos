@@ -1,0 +1,6 @@
+[rhel-7-x86_64-os]
+auth = rhel-server
+url = https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/os
+path = rhel/7Server/x86_64/os
+createrepo = true
+

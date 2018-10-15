@@ -1,0 +1,5 @@
+[cuda-7-x86_64]
+url=http://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64
+path = cuda/el7/x86_64
+createrepo = true
+
